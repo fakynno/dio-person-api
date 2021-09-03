@@ -2,6 +2,7 @@ package one.digitalinnovation.personapi.service;
 
 import one.digitalinnovation.personapi.dto.request.PersonDTO;
 import one.digitalinnovation.personapi.dto.response.MessageResponseDTO;
+import one.digitalinnovation.personapi.exception.PersonNotFoundException;
 import one.digitalinnovation.personapi.mapper.PersonMapper;
 import one.digitalinnovation.personapi.model.Person;
 import one.digitalinnovation.personapi.repository.PersonRepository;
@@ -42,11 +43,12 @@ public class PersonService {
                 .collect(Collectors.toList());
     }
 
-    public PersonDTO findById(Long id) {
-        Optional<Person> optionalPerson = personRepository.findById(id);
-        if (optionalPerson.isEmpty()) {
-            throw new PersonNotFoundException(id);
-        }
-        return personMapper.toDTO(optionalPerson.get());
+    public PersonDTO findById(Long id) throws PersonNotFoundException {
+
+      Person person = personRepository
+              .findById(id)
+              .orElseThrow(() -> new PersonNotFoundException(id));
+
+        return personMapper.toDTO(person);
     }
 }
