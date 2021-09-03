@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ public class Person {
     private String lastName;
 
     @Column(nullable = false, unique = true)
+    @CPF
     private String cpf;
 
     private LocalDate birthDate;
