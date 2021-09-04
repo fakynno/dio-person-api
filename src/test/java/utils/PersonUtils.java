@@ -1,6 +1,7 @@
 package utils;
 
 import one.digitalinnovation.personapi.dto.request.PersonDTO;
+import one.digitalinnovation.personapi.model.Person;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -20,6 +21,17 @@ public class PersonUtils {
                 .cpf(CPF_NUMBER)
                 .birthDate("02-04-1982")
                 .phoneList(Collections.singletonList(PhoneUtils.createFakeDTO()))
+                .build();
+    }
+
+    public static Person createFakeEntity() {
+        return Person.builder()
+                .id(PERSON_ID)
+                .firstName(FIRST_NAME)
+                .lastName(LAST_NAME)
+                .cpf(CPF_NUMBER)
+                .birthDate(BIRTH_DATE)
+                .phoneList(Collections.singletonList(PhoneUtils.createFakeEntity()))
                 .build();
     }
 
